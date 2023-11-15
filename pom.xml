@@ -83,26 +83,30 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <includes>
-                        <include>**/*.kt</include>
-                        <include>**/*.java</include>
-                        <include>**/*.g4</include>
-                    </includes>
-                </configuration>
+	    <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-assembly-plugin</artifactId>
+              <version>2.6</version>
+              <executions>
+                <execution>
+                  <id>make-assembly</id>
+                    <phase>package</phase>
+                    <goals> <goal>single</goal> </goals>
+                    <configuration>
+                      <archive>
+                        <manifest>
+                          <mainClass>ru.spbstu.grammarConverter.MainKt</mainClass>
+                        </manifest>
+                      </archive>
+                      <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                      </descriptorRefs>
+                    </configuration>
+                </execution>
+              </executions>
             </plugin>
-
+	    
+	    
             <plugin>
                 <groupId>org.antlr</groupId>
                 <artifactId>antlr4-maven-plugin</artifactId>
